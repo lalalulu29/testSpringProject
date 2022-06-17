@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <title>Test JAVA</title>
     <link rel="icon" type="image/gif/png" th:href="@{/icons/alarm.svg}">
+
+    <script>
+        function blink() {
+            var textElement = document.getElementById("messageLabel")
+            console.log(textElement.style.visibility)
+            if (textElement.style.visibility == "visible") {
+                textElement.style.visibility = "hidden"
+            } else {
+                textElement.style.visibility = "visible"
+            }
+        }
+
+        function getFromTextField() {
+            var textElement = document.getElementById("textField").value
+
+            document.getElementById("fieldH6").innerHTML = textElement
+            console.log(textElement)
+        }
+
+        setInterval(blink,300)
+        setInterval(getFromTextField,300)
+    </script>
 </head>
 <body>
     <H1>Hello World</H1>
 <div>
-    <input type="text" th:value="*{age}"/>
+    <h4 id="fieldH6"> </h4>
+    <input type="text" th:value="*{age}" id="textField"/>
 </div>
 <div th:unless="${#lists.isEmpty(people)}">
     <table border="1">
@@ -27,6 +50,9 @@
             <td th:utext="${person.password}">...</td>
         </tr>
     </table>
+</div>
+<div>
+    <h3 style="color:red" th:text="${messageError}" id="messageLabel"></h3>
 </div>
 
 </body>

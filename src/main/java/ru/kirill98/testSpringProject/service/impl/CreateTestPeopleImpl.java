@@ -1,7 +1,5 @@
 package ru.kirill98.testSpringProject.service.impl;
 
-import com.sun.istack.internal.Interned;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.kirill98.testSpringProject.entity.Person;
 import ru.kirill98.testSpringProject.service.CreateTestPeople;
