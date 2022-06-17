@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test JAVA</title>
+    <link rel="icon" type="image/gif/png" th:href="@{/icons/alarm.svg}">
+</head>
+<body>
+    <H1>Hello World</H1>
+<div>
+    <input type="text" th:value="*{age}"/>
+</div>
+<div th:unless="${#lists.isEmpty(people)}">
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Password (MD5)</th>
+        </tr>
+        <tr th:each = "person : ${people}">
+            <td th:utext="${person.id}">...</td>
+            <td th:utext="${person.firstName}">...</td>
+            <td th:utext="${person.lastName}">...</td>
+            <td th:utext="${person.age}">...</td>
+            <td th:utext="${person.password}">...</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
