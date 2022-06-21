@@ -5,14 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
-    @NotNull
-    private Long id;
+public class FormPerson {
     @NotNull
     private String firstName;
     @NotNull
@@ -21,5 +17,5 @@ public class Person {
     @NotNull
     private String password;
     @NotNull
-    private Date regDate;
+    private String checkPassword;
 }
