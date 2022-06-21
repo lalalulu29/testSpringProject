@@ -26,7 +26,7 @@ public class CreateTestPeopleImpl implements CreateTestPeople {
                 "Пупкин",
                 30,
                 "202cb962ac59075b964b07152d234b70");
-        Person person4 = new Person(3L,
+        Person person4 = new Person(4L,
                 "Вася",
                 "Пупкин",
                 39,

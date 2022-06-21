@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kirill98.testSpringProject.entity.Person;
 import ru.kirill98.testSpringProject.service.CreateTestPeople;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +31,7 @@ public class MainController {
 
     private final CreateTestPeople testPeople;
     private static final List<Person> persons = new ArrayList<>();
+    private static long count = 5;
 
 
 
@@ -50,11 +56,27 @@ public class MainController {
         return "newPerson";
     }
     @RequestMapping(value = "new_person", method = RequestMethod.POST)
-    public String createPerson(Model model, @ModelAttribute("Person") Person newPerson) {
+    public String createPerson(Model model, @ModelAttribute("Person") Person newPerson) throws NoSuchAlgorithmException {
         if(newPerson.getFirstName() != null &&
                 newPerson.getFirstName().length() > 0 &&
                 newPerson.getLastName() != null &&
-                newPerson.getLastName().length() > 0) {
+                newPerson.getLastName().length() > 0 &&
+                newPerson.getPassword() != null &&
+                newPerson.getPassword().length() >= 8) {
+
+            newPerson.setId(count);
+            count++;
+            newPerson.setAge(null);
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.reset();
+            messageDigest.update(newPerson.getPassword().getBytes(StandardCharsets.UTF_8));
+            byte[] md5Password = messageDigest.digest();
+            BigInteger bigInt = new BigInteger(1,md5Password);
+            StringBuilder hashText = new StringBuilder(bigInt.toString(16));
+            while(hashText.length() < 32 ){
+                hashText.insert(0, "0");
+            }
+            newPerson.setPassword(hashText.toString());
             persons.add(newPerson);
             return "redirect:/";
         }
