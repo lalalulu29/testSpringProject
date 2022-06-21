@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create person</title>
+</head>
+<body>
+    <h1>Create a new Person:</h1>
+    <br/>
+
+    <form th:action="@{/new_person}"
+        th:object="${person}" method="post">
+        First Name:
+        <input type="text" th:field="*{firstName}">
+        <br/>
+        Last Name:
+        <input type="text" th:field="*{lastName}">
+        <br/>
+        <br/>
+        <input type="submit" value="Create new person">
+    </form>
+
+    <br/>
+    <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red">
+        ...
+    </div>
+
+</body>
+</html>

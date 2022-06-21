@@ -1,19 +1,23 @@
-        function blink() {
-            var textElement = document.getElementById("messageLabel")
-            console.log(textElement.style.visibility)
-            if (textElement.style.visibility == "visible") {
-                textElement.style.visibility = "hidden"
-            } else {
-                textElement.style.visibility = "visible"
-            }
-        }
+function blinkText() {
+    const textElement = document.getElementById("messageLabel");
+    console.log(textElement.style.visibility)
+    if (textElement.style.visibility === "visible") {
+        textElement.style.visibility = "hidden"
+    } else {
+        textElement.style.visibility = "visible"
+    }
+}
 
-        function getFromTextField() {
-            var textElement = document.getElementById("textField").value
+function getFromTextField() {
+    const textElement = document.getElementById("textField").value;
 
-            document.getElementById("fieldH6").innerHTML = textElement
-            console.log(textElement)
-        }
+    document.getElementById("fieldH6").innerHTML = textElement
+    console.log(textElement)
+}
 
-        setInterval(blink,300)
-        setInterval(getFromTextField,300)
+function goToCreateNewPerson() {
+    location.href="/new_person/"
+}
+
+setInterval(blinkText,300)
+setInterval(getFromTextField,300)

@@ -2,38 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Test JAVA</title>
-    <link rel="icon" type="image/gif/png" th:href="@{/icons/alarm.svg}">
+    <title th:utext="${title}"></title>
+    <link rel="icon" type="image/gif/png" href="/icons/alarm.svg">
 
     <script th:src="@{/scripts.js}"></script>
 </head>
 <body>
+<div>
     <H1>Hello World</H1>
-<div>
-    <h4 id="fieldH6"> </h4>
-    <input type="text" th:value="*{age}" id="textField"/>
+    <div>
+        <h4 id="fieldH6"> </h4>
+        <input type="text" th:value="*{age}" id="textField"/>
+    </div>
+    <div>
+        <input type="button" id="createNewPerson" value="Добавить нового человека" onclick="goToCreateNewPerson()">
+    </div>
+    <div th:unless="${#lists.isEmpty(people)}">
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
+                <th>Password (MD5)</th>
+            </tr>
+            <tr th:each = "person : ${people}">
+                <td th:utext="${person.id}">...</td>
+                <td th:utext="${person.firstName}">...</td>
+                <td th:utext="${person.lastName}">...</td>
+                <td th:utext="${person.age}">...</td>
+                <td th:utext="${person.password}">...</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h3 style="color:red" th:text="${messageError}" id="messageLabel"></h3>
+    </div>
 </div>
-<div th:unless="${#lists.isEmpty(people)}">
-    <table border="1">
-        <tr>
-            <th>Id</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Age</th>
-            <th>Password (MD5)</th>
-        </tr>
-        <tr th:each = "person : ${people}">
-            <td th:utext="${person.id}">...</td>
-            <td th:utext="${person.firstName}">...</td>
-            <td th:utext="${person.lastName}">...</td>
-            <td th:utext="${person.age}">...</td>
-            <td th:utext="${person.password}">...</td>
-        </tr>
-    </table>
-</div>
-<div>
-    <h3 style="color:red" th:text="${messageError}" id="messageLabel"></h3>
-</div>
+
 
 </body>
 </html>
