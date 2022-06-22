@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create person</title>
+    <script th:src="@{/newPersonsScripts.js}"></script>
 </head>
 <body>
     <h1>Create a new Person:</h1>
@@ -17,10 +18,14 @@
         <input type="text" th:field="*{lastName}">
         <br/>
         Password:
-        <input type="password" th:field="*{password}">
+        <input id="passwordField" type="password" th:field="*{password}">
         <br/>
         Repeat password:
-        <input type="password" th:field="*{checkPassword}">
+        <input id="passwordCheckField" type="password" th:field="*{checkPassword}">
+        <div id="notEqualsPassword" th:utext="${notEqualsPassword}"
+             style="color:red; visibility:hidden">
+            ...
+        </div>
         <br/>
         <br/>
         <input type="submit" value="Create new person">

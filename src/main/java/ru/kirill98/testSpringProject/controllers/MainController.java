@@ -27,6 +27,9 @@ public class MainController {
     @Value("${message.server.error}")
     private String errorMessage;
 
+    @Value("${message.server.notEqualsPassword}")
+    private String notEqualsPassword;
+
     private final CreateTestPeople testPeople;
     private static final List<Person> persons = new ArrayList<>();
     private static long count = 5;
@@ -44,13 +47,13 @@ public class MainController {
         model.addAttribute("people",persons);
 
         model.addAttribute("messageError", dangerMessage);
-        System.out.println("Was got GET request");
         return "index";
     }
     @RequestMapping(value = "new_person", method = RequestMethod.GET)
     public String createPersonView(Model model) {
         FormPerson newPerson = new FormPerson();
         model.addAttribute("person", newPerson);
+        model.addAttribute("notEqualsPassword", notEqualsPassword);
         return "newPerson";
     }
     @RequestMapping(value = "new_person", method = RequestMethod.POST)
@@ -79,6 +82,7 @@ public class MainController {
         }
         model.addAttribute("person", newPerson);
         model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("notEqualsPassword", notEqualsPassword);
         return "newPerson";
     }
 }
