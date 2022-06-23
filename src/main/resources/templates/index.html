@@ -25,6 +25,7 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>Password (MD5)</th>
+                <th>Date</th>
             </tr>
             <tr th:each = "person : ${people}">
                 <td th:utext="${person.id}">...</td>
@@ -32,6 +33,7 @@
                 <td th:utext="${person.lastName}">...</td>
                 <td th:utext="${person.age}">...</td>
                 <td th:utext="${person.password}">...</td>
+                <td th:utext="${person.regDate}">...</td>
             </tr>
         </table>
     </div>

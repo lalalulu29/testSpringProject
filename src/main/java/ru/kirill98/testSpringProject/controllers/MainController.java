@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kirill98.testSpringProject.entity.FormPerson;
 import ru.kirill98.testSpringProject.entity.Person;
 import ru.kirill98.testSpringProject.service.CreateTestPeople;
+import ru.kirill98.testSpringProject.service.PersonMapper;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -31,8 +32,9 @@ public class MainController {
     private String notEqualsPassword;
 
     private final CreateTestPeople testPeople;
+    private final PersonMapper personMapper;
     private static final List<Person> persons = new ArrayList<>();
-    private static long count = 5;
+    private static long count = 6;
 
 
 
@@ -65,7 +67,7 @@ public class MainController {
                 newPerson.getPassword() != null &&
                 newPerson.getPassword().length() >= 8 &&
                 newPerson.getCheckPassword().equals(newPerson.getPassword())) {
-            count++;
+
             newPerson.setAge(null);
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.reset();
@@ -77,7 +79,10 @@ public class MainController {
                 hashText.insert(0, "0");
             }
             newPerson.setPassword(hashText.toString());
-            persons.add(new Person(count, newPerson.getFirstName(), newPerson.getLastName(), null, newPerson.getPassword(), new Date()));
+
+            Person personFromFormPerson = personMapper.toPerson(newPerson, count);
+            persons.add(personFromFormPerson);
+            count++;
             return "redirect:/";
         }
         model.addAttribute("person", newPerson);
